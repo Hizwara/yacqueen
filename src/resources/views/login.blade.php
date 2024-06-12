@@ -1,47 +1,44 @@
-@extends("layout.layout")
+<!doctype html>
+<html>
 
-@section('menu', 'Login')
+<head>
+    @include('includes.head')
+</head>
 
-@section('content')
-
-<main class="w-screen h-screen">
-    <div class="h-[80px]"></div>
-    <div class="flex flex-row justify-center items-center m-14">
-        <img src={{URL("/image/login.png")}} class="mr-20">
-        <div class="flex flex-col">
-            <form method="POST" action="{{route('login')}}">
-                @csrf
-                @if ($errors->has('loginError'))
-                <div class="w-[462px] bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                    role="alert">
-                    <span class="block sm:inline">{{$errors->first('loginError')}}</span>
-                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20">
-                            <title>Close</title>
-                            <path
-                                d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-                        </svg>
-                    </span>
+<body class="leading-normal tracking-normal" style="font-family: 'Source Sans Pro', sans-serif;">
+    <div class="">
+        <div id="main" class="row">
+            <div class="min-h-screen grid md:grid-cols-2 grid-cols-1">
+                <form action="{{ route('login.store') }}" method="POST"
+                    class="flex flex-col items-center justify-center">
+                    @csrf
+                    <div class="w-3/4">
+                        <a href="/" class="underline">
+                            Kembali</a>
+                        <h1 class="text-4xl font-bold text-center">Selamat Datang</h1>
+                        @error('status')
+                        <div class="text-red-500 text-center p-2 rounded">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <div class="mt-5 flex flex-col space-y-4">
+                            <x-input id="email" label="Email" type="email" name="email" :value="old('email')" required
+                                autofocus placeholder="Email" class="block mt-1 w-full" />
+                            <x-input id="password" label="Password" type="password" name="password" required
+                                autocomplete="current-password" placeholder="Password" class="block mt-1 w-full" />
+                        </div>
+                        <x-button class="mt-5 w-full bg-blue-500" color="blue" label="Login" type="submit" />
+                        <div class="flex items-center justify-center mt-5">
+                            <a href="{{ route('register') }}" class="text-center text-blue-500">Belum punya akun?
+                                Daftar</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="login-background hidden md:block">
                 </div>
-                @endif
-
-                <h1 class="ml-3 font-bold text-4xl mt-3">Masuk </h1>
-                <input id="email" name="email" type="email" class="w-[462px] h-[69px] pl-3 mt-3 rounded"
-                    placeholder="Email" />
-                <input id="password" name="password" type="password" class="w-[462px] h-[69px] pl-3 mt-3 rounded"
-                    placeholder="password" />
-                <div class="mt-10 flex flex-row justify-center w-[462px]">
-
-                    <button type="submit"
-                        class="w-[168px] text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Login</button>
-                    <p class="text-xl m-auto text-center"> atau </p>
-                    <a type="button" href="/signup"
-                        class="w-[168px] text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mendaftar</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
+</body>
 
-</main>
-@endsection
+</html>

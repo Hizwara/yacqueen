@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./resources/**/*.blade.php",
@@ -6,14 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        dark: {},
-      },
       fontFamily: {
-        primary: "Poppins, snas-serif",
-        secondary: "Inter, sans-serif",
+        primary: ["Inter", "sans-serif"],
+        secondary: ["Roboto", "sans-serif"],
       },
     },
   },
   plugins: [],
-}
+};
