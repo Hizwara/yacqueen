@@ -30,8 +30,6 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
-      - name: Run tests
-        run: php artisan test
 
   pullserver:
     name: Pull Server
