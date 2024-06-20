@@ -20,7 +20,9 @@ jobs:
           coverage: none
 
       - name: Run composer install
-        run: composer install -n --prefer-dist
+        run: |
+          cd src
+          composer install -n --prefer-dist
 
       - name: Prepare Laravel Application
         run: |
@@ -44,4 +46,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            ls -all
+            cd yacqueen
+            git pull origin main
+            sudo docker compose up -d --no-cache
+ 
